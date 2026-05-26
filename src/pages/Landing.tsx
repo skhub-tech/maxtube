@@ -1,6 +1,9 @@
-import { useState, useEffect, Suspense } from "react";
+import { useState, Suspense } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader, Download, ShieldCheck, Zap, MinusCircle, Smartphone, Music, Lock, Info, ChevronRight, Play, Wifi } from "lucide-react";
+import {
+  Loader, Download, ShieldCheck, Zap, MinusCircle,
+  Smartphone, Music, Lock, Info, ChevronRight, Play
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -10,10 +13,8 @@ import {
   DialogTitle,
   DialogDescription,
 } from "@/components/ui/dialog";
-
 import { RealisticBubbles } from "@/components/RealisticBubbles";
 
-// Content interface based on strings.json
 interface SiteContent {
   hero: {
     title: string;
@@ -23,11 +24,7 @@ interface SiteContent {
   };
   features: {
     section_title: string;
-    items: Array<{
-      icon: string;
-      title: string;
-      description: string;
-    }>;
+    items: Array<{ icon: string; title: string; description: string }>;
   };
   download_section: {
     title: string;
@@ -39,25 +36,15 @@ interface SiteContent {
   };
   faq: {
     section_title: string;
-    items: Array<{
-      question: string;
-      answer: string;
-    }>;
+    items: Array<{ question: string; answer: string }>;
   };
-  footer: {
-    disclaimer: string;
-    copyright: string;
-  };
+  footer: { disclaimer: string; copyright: string };
 }
 
 interface DownloadLinks {
-  apk_links: {
-    "64bit": string;
-    "32bit": string;
-  };
+  apk_links: { "64bit": string; "32bit": string };
 }
 
-// Import static content directly to enable Hot Module Replacement (HMR)
 import stringsData from "../sahitya/strings.json";
 import downloadsData from "../sahitya/downloads.json";
 
@@ -72,13 +59,9 @@ export default function Landing() {
 
   const handleDownloadClick = (type: "64bit" | "32bit") => {
     if (!links) return;
-
     setRedirecting({ active: true, type });
-
-    // Simulate a professional redirection experience
     setTimeout(() => {
-      const url = links.apk_links[type];
-      window.location.href = url;
+      window.location.href = links.apk_links[type];
     }, 2000);
   };
 
@@ -90,68 +73,86 @@ export default function Landing() {
     );
   }
 
-  // Feature icons mapped to MaxTube features
   const featureIcons = [
-    <MinusCircle className="w-8 h-8 text-[#FF0000]" />,
-    <Music className="w-8 h-8 text-[#FF4444]" />,
-    <Download className="w-8 h-8 text-[#FF0000]" />,
-    <Zap className="w-8 h-8 text-[#FF4444]" />,
-    <Lock className="w-8 h-8 text-[#FF0000]" />,
-    <Smartphone className="w-8 h-8 text-[#FF4444]" />,
+    <MinusCircle className="w-7 h-7 text-[#FF0000]" />,
+    <Music className="w-7 h-7 text-[#FF4444]" />,
+    <Download className="w-7 h-7 text-[#FF0000]" />,
+    <Zap className="w-7 h-7 text-[#FF4444]" />,
+    <Lock className="w-7 h-7 text-[#FF0000]" />,
+    <Smartphone className="w-7 h-7 text-[#FF4444]" />,
   ];
 
   return (
     <div className="dark min-h-screen bg-[#0D0D0D] text-white selection:bg-[#FF0000]/30 overflow-x-hidden">
-      {/* Background Effects */}
-      <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {/* Animated Blurry Blobs — YouTube red palette */}
-        {[...Array(5)].map((_, i) => (
+
+      {/* ── Background blobs ── */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none z-0">
+        {[...Array(4)].map((_, i) => (
           <motion.div
-            key={`blob-${i}`}
-            className="absolute rounded-full blur-[120px] opacity-15"
-            animate={{
-              x: [0, 120, -120, 0],
-              y: [0, -120, 120, 0],
-              scale: [1, 1.3, 0.7, 1],
-            }}
-            transition={{
-              duration: 25 + i * 5,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
+            key={i}
+            className="absolute rounded-full blur-[100px]"
+            animate={{ x: [0, 80, -80, 0], y: [0, -80, 80, 0], scale: [1, 1.2, 0.8, 1] }}
+            transition={{ duration: 28 + i * 6, repeat: Infinity, ease: "easeInOut" }}
             style={{
-              width: 700 + i * 100,
-              height: 700 + i * 100,
-              left: `${-20 + i * 25}%`,
-              top: `${-20 + i * 15}%`,
-              background: i % 2 === 0 ? "#FF0000" : "#CC0000",
+              width: 500 + i * 100,
+              height: 500 + i * 100,
+              left: `${-10 + i * 28}%`,
+              top: `${-15 + i * 18}%`,
+              background: i % 2 === 0 ? "rgba(255,0,0,0.12)" : "rgba(180,0,0,0.10)",
             }}
           />
         ))}
-
-        {/* Realistic 3D Bubbles (Three.js) */}
         <Suspense fallback={null}>
           <RealisticBubbles key="realistic-bubbles" />
         </Suspense>
       </div>
 
-      {/* Hero Section */}
-      <section className="relative pt-32 pb-20 px-4">
-        <div className="container mx-auto text-center max-w-4xl">
+      {/* ══════════════════════════════════════
+          NAVBAR — Logo centered at top
+      ══════════════════════════════════════ */}
+      <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center px-4 py-3
+                         bg-[#0D0D0D]/70 backdrop-blur-xl border-b border-white/5">
+        <motion.div
+          initial={{ opacity: 0, y: -16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="flex items-center gap-3"
+        >
+          <div className="relative">
+            <div className="absolute inset-0 bg-[#FF0000]/40 blur-md rounded-xl" />
+            <img
+              src="/maxtube_icon.png"
+              alt="MaxTube"
+              className="relative w-9 h-9 sm:w-10 sm:h-10 rounded-xl object-contain"
+            />
+          </div>
+          <span className="text-xl sm:text-2xl font-black tracking-tight bg-gradient-to-r from-white to-[#FF4444] bg-clip-text text-transparent">
+            MaxTube
+          </span>
+        </motion.div>
+      </header>
+
+      {/* ══════════════════════════════════════
+          HERO SECTION
+      ══════════════════════════════════════ */}
+      <section className="relative z-10 pt-28 pb-16 px-4 sm:px-6">
+        <div className="mx-auto max-w-3xl text-center">
+
+          {/* App icon */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-            className="mb-8 inline-block"
+            transition={{ duration: 0.7, ease: "easeOut" }}
+            className="mb-6 flex justify-center"
           >
             <div className="relative group">
-              <div className="absolute inset-0 bg-gradient-to-br from-[#FF0000] to-[#8B0000] blur-2xl opacity-60 group-hover:opacity-90 transition-opacity rounded-full animate-pulse" />
-              <div className="relative w-40 h-40 bg-gradient-to-br from-[#FF0000] to-[#8B0000] rounded-[2rem] flex items-center justify-center p-1 shadow-[0_0_50px_rgba(255,0,0,0.5)]">
-                <div className="w-full h-full bg-[#0D0D0D] rounded-[1.8rem] flex items-center justify-center text-6xl shadow-inner overflow-hidden">
+              <div className="absolute inset-0 bg-[#FF0000]/50 blur-2xl rounded-full animate-pulse scale-110" />
+              <div className="relative w-28 h-28 sm:w-36 sm:h-36 bg-gradient-to-br from-[#FF0000] to-[#8B0000] rounded-[1.8rem] sm:rounded-[2rem] p-[3px] shadow-[0_0_40px_rgba(255,0,0,0.5)]">
+                <div className="w-full h-full bg-[#0D0D0D] rounded-[1.6rem] sm:rounded-[1.8rem] overflow-hidden flex items-center justify-center">
                   <img
                     src="/maxtube_icon.png"
-                    alt="MaxTube"
-                    className="w-full h-full object-contain rounded-[22px] p-2"
+                    alt="MaxTube App"
+                    className="w-full h-full object-contain p-2"
                   />
                 </div>
               </div>
@@ -160,67 +161,77 @@ export default function Landing() {
 
           {/* Badge */}
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
+            initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="mb-6 inline-flex items-center gap-2 bg-[#FF0000]/10 border border-[#FF0000]/30 rounded-full px-5 py-2 text-sm font-bold text-[#FF4444] uppercase tracking-widest"
+            transition={{ duration: 0.5, delay: 0.15 }}
+            className="mb-5 inline-flex items-center gap-2 bg-[#FF0000]/10 border border-[#FF0000]/25
+                       rounded-full px-4 py-1.5 text-xs sm:text-sm font-bold text-[#FF5555] uppercase tracking-widest"
           >
-            <Play className="w-3.5 h-3.5 fill-[#FF4444]" />
+            <Play className="w-3 h-3 fill-[#FF5555]" />
             YouTube — Supercharged
           </motion.div>
 
+          {/* Title */}
           <motion.h1
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-6xl md:text-8xl font-black mb-6 tracking-tighter bg-gradient-to-r from-white via-[#FF4444] to-[#FF0000] bg-clip-text text-transparent"
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="text-5xl sm:text-7xl md:text-8xl font-black mb-4 tracking-tighter leading-none
+                       bg-gradient-to-br from-white via-[#FF5555] to-[#FF0000] bg-clip-text text-transparent"
           >
             {content.hero.title}
           </motion.h1>
 
+          {/* Subtitle */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="text-2xl md:text-3xl font-bold mb-4 text-[#FF4444]"
+            transition={{ duration: 0.7, delay: 0.3 }}
+            className="text-lg sm:text-2xl font-bold mb-3 text-[#FF5555]"
           >
             {content.hero.subtitle}
           </motion.p>
 
+          {/* Description */}
           <motion.p
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="text-lg md:text-xl text-gray-400 mb-10 max-w-2xl mx-auto leading-relaxed"
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="text-sm sm:text-base md:text-lg text-gray-400 mb-8 max-w-xl mx-auto leading-relaxed px-2"
           >
             {content.hero.description}
           </motion.p>
 
+          {/* CTA */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.7, delay: 0.5 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Button
               id="hero-download-btn"
               onClick={() => setIsModalOpen(true)}
-              className="bg-gradient-to-r from-[#FF0000] to-[#CC0000] hover:scale-105 transition-all duration-300 text-white font-black px-12 py-8 rounded-full text-xl shadow-[0_0_40px_rgba(255,0,0,0.45)]"
+              className="w-full sm:w-auto bg-gradient-to-r from-[#FF0000] to-[#CC0000]
+                         hover:from-[#FF2222] hover:to-[#EE0000] hover:scale-105
+                         transition-all duration-300 text-white font-black
+                         px-8 sm:px-12 py-5 sm:py-6 rounded-full text-base sm:text-xl
+                         shadow-[0_0_35px_rgba(255,0,0,0.4)]"
             >
               {content.hero.cta_button}
             </Button>
-            <div className="flex items-center gap-2 text-gray-500 text-sm font-medium">
-              <ShieldCheck className="w-4 h-4 text-green-500" />
+            <div className="flex items-center gap-2 text-gray-500 text-xs sm:text-sm font-medium">
+              <ShieldCheck className="w-4 h-4 text-green-500 shrink-0" />
               Safe · Scanned · Verified
             </div>
           </motion.div>
 
-          {/* Stats row */}
+          {/* Stats */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
-            className="mt-16 grid grid-cols-3 gap-6 max-w-lg mx-auto"
+            transition={{ duration: 0.7, delay: 0.65 }}
+            className="mt-12 grid grid-cols-3 gap-4 max-w-xs sm:max-w-sm mx-auto"
           >
             {[
               { label: "Downloads", value: "2M+" },
@@ -228,42 +239,57 @@ export default function Landing() {
               { label: "Version", value: "v18.x" },
             ].map((stat, i) => (
               <div key={i} className="text-center">
-                <div className="text-3xl font-black text-white">{stat.value}</div>
-                <div className="text-xs text-gray-500 uppercase tracking-widest mt-1">{stat.label}</div>
+                <div className="text-2xl sm:text-3xl font-black text-white">{stat.value}</div>
+                <div className="text-[10px] sm:text-xs text-gray-500 uppercase tracking-widest mt-1">{stat.label}</div>
               </div>
             ))}
           </motion.div>
         </div>
       </section>
 
-      {/* Features Grid */}
-      <section className="py-24 px-4 relative z-10">
-        <div className="container mx-auto max-w-6xl">
-          <h2 className="text-4xl md:text-5xl font-black text-center mb-4 tracking-tight">
-            {content.features.section_title}
-          </h2>
-          <p className="text-gray-500 text-center mb-16 text-lg">Everything YouTube should have been.</p>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* ══════════════════════════════════════
+          FEATURES GRID
+      ══════════════════════════════════════ */}
+      <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-6">
+        <div className="mx-auto max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12 sm:mb-16"
+          >
+            <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mb-3 tracking-tight">
+              {content.features.section_title}
+            </h2>
+            <p className="text-gray-500 text-base sm:text-lg">Everything YouTube should have been.</p>
+          </motion.div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
             {content.features.items.map((feature, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 24 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                transition={{ duration: 0.5, delay: idx * 0.08 }}
                 viewport={{ once: true }}
               >
-                <Card className="bg-[#111111] border-white/5 hover:border-[#FF0000]/40 transition-all duration-500 backdrop-blur-xl group overflow-hidden relative">
-                  <div className="absolute inset-0 bg-gradient-to-br from-[#FF0000]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
-                  <CardContent className="p-8 relative">
-                    <div className="text-4xl mb-6 bg-[#1A1A1A] w-14 h-14 rounded-2xl flex items-center justify-center group-hover:scale-110 transition-transform duration-500 shadow-xl border border-white/5">
-                      {featureIcons[idx] || <span>{feature.icon}</span>}
+                <Card className="h-full bg-[#111111] border border-white/5 hover:border-[#FF0000]/40
+                                 transition-all duration-400 group overflow-hidden relative">
+                  <div className="absolute inset-0 bg-gradient-to-br from-[#FF0000]/4 to-transparent
+                                  opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <CardContent className="p-6 sm:p-7 relative">
+                    <div className="mb-5 w-12 h-12 sm:w-14 sm:h-14 bg-[#1A1A1A] rounded-2xl
+                                    flex items-center justify-center border border-white/5
+                                    group-hover:scale-110 group-hover:border-[#FF0000]/20
+                                    transition-all duration-400 shadow-lg">
+                      {featureIcons[idx] ?? <span className="text-2xl">{feature.icon}</span>}
                     </div>
-                    <h3 className="text-xl font-bold mb-3 text-white group-hover:text-[#FF4444] transition-colors">
+                    <h3 className="text-base sm:text-lg font-bold mb-2 text-white
+                                   group-hover:text-[#FF5555] transition-colors duration-300">
                       {feature.title}
                     </h3>
-                    <p className="text-gray-400 leading-relaxed">
-                      {feature.description}
-                    </p>
+                    <p className="text-gray-400 text-sm leading-relaxed">{feature.description}</p>
                   </CardContent>
                 </Card>
               </motion.div>
@@ -272,60 +298,98 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* How to Install Banner */}
-      <section className="py-20 px-4 bg-gradient-to-r from-[#FF0000]/10 via-[#1A0000]/40 to-[#FF0000]/10 border-y border-[#FF0000]/10">
-        <div className="container mx-auto max-w-4xl text-center">
-          <h2 className="text-3xl md:text-4xl font-black mb-12">Install in 3 Simple Steps</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+      {/* ══════════════════════════════════════
+          HOW TO INSTALL
+      ══════════════════════════════════════ */}
+      <section className="relative z-10 py-16 sm:py-20 px-4 sm:px-6
+                          bg-gradient-to-r from-[#FF0000]/8 via-[#1A0000]/30 to-[#FF0000]/8
+                          border-y border-[#FF0000]/10">
+        <div className="mx-auto max-w-4xl text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-2xl sm:text-3xl md:text-4xl font-black mb-10 sm:mb-12"
+          >
+            Install in 3 Simple Steps
+          </motion.h2>
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-5 sm:gap-6">
             {[
-              { step: "01", title: "Download APK", desc: "Tap the download button and choose your device architecture (64-bit recommended)." },
-              { step: "02", title: "Enable Unknown Sources", desc: "Go to Settings → Security → enable 'Install from Unknown Sources'." },
-              { step: "03", title: "Install & Enjoy", desc: "Open the APK, tap Install, and launch MaxTube. Start streaming, ad-free!" },
+              { step: "01", title: "Download APK", desc: "Tap the button below and choose 64-bit (recommended) or 32-bit." },
+              { step: "02", title: "Enable Sources", desc: "Settings → Security → enable 'Install from Unknown Sources'." },
+              { step: "03", title: "Install & Enjoy", desc: "Open the APK, tap Install, launch MaxTube. Ad-free streaming starts now!" },
             ].map((s, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: i * 0.15 }}
+                transition={{ duration: 0.5, delay: i * 0.12 }}
                 viewport={{ once: true }}
-                className="relative bg-[#111111] border border-white/5 rounded-2xl p-8 hover:border-[#FF0000]/30 transition-all"
+                className="bg-[#111111] border border-white/5 rounded-2xl p-6 sm:p-7
+                           hover:border-[#FF0000]/25 transition-all text-left"
               >
-                <div className="text-6xl font-black text-[#FF0000]/20 mb-4">{s.step}</div>
-                <h3 className="text-xl font-bold mb-3 text-white">{s.title}</h3>
+                <div className="text-5xl sm:text-6xl font-black text-[#FF0000]/15 mb-3 leading-none">{s.step}</div>
+                <h3 className="text-base sm:text-lg font-bold mb-2 text-white">{s.title}</h3>
                 <p className="text-gray-400 text-sm leading-relaxed">{s.desc}</p>
               </motion.div>
             ))}
           </div>
+
+          {/* Second CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="mt-10"
+          >
+            <Button
+              onClick={() => setIsModalOpen(true)}
+              className="bg-gradient-to-r from-[#FF0000] to-[#CC0000] hover:scale-105
+                         transition-all duration-300 text-white font-black
+                         px-8 py-5 rounded-full text-base sm:text-lg
+                         shadow-[0_0_30px_rgba(255,0,0,0.35)]"
+            >
+              ⬇️ Download MaxTube Now
+            </Button>
+          </motion.div>
         </div>
       </section>
 
-      {/* FAQ Section */}
-      <section className="py-24 px-4 bg-black/20">
-        <div className="container mx-auto max-w-3xl">
-          <h2 className="text-4xl font-black text-center mb-16 tracking-tight">
+      {/* ══════════════════════════════════════
+          FAQ
+      ══════════════════════════════════════ */}
+      <section className="relative z-10 py-16 sm:py-24 px-4 sm:px-6">
+        <div className="mx-auto max-w-2xl sm:max-w-3xl">
+          <motion.h2
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            viewport={{ once: true }}
+            className="text-3xl sm:text-4xl font-black text-center mb-10 sm:mb-14 tracking-tight"
+          >
             {content.faq.section_title}
-          </h2>
-          <div className="space-y-6">
+          </motion.h2>
+          <div className="space-y-4 sm:space-y-5">
             {content.faq.items.map((item, idx) => (
               <motion.div
                 key={idx}
-                initial={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, x: -16 }}
                 whileInView={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: idx * 0.1 }}
+                transition={{ duration: 0.45, delay: idx * 0.08 }}
                 viewport={{ once: true }}
-                className="bg-[#111111] border border-white/5 rounded-2xl p-6 hover:border-[#FF0000]/30 transition-all group"
+                className="bg-[#111111] border border-white/5 rounded-2xl p-5 sm:p-6
+                           hover:border-[#FF0000]/25 transition-all group"
               >
-                <div className="flex items-start gap-4">
-                  <div className="mt-1">
-                    <Info className="w-6 h-6 text-[#FF0000]/60 group-hover:text-[#FF0000] transition-colors" />
-                  </div>
+                <div className="flex items-start gap-3 sm:gap-4">
+                  <Info className="w-5 h-5 sm:w-6 sm:h-6 text-[#FF0000]/50 group-hover:text-[#FF0000]
+                                   transition-colors mt-0.5 shrink-0" />
                   <div>
-                    <h3 className="text-lg font-bold mb-2 text-[#FF4444]/90">
+                    <h3 className="text-sm sm:text-base font-bold mb-1.5 text-[#FF5555]/90">
                       {item.question}
                     </h3>
-                    <p className="text-gray-400 leading-relaxed">
-                      {item.answer}
-                    </p>
+                    <p className="text-gray-400 text-sm leading-relaxed">{item.answer}</p>
                   </div>
                 </div>
               </motion.div>
@@ -334,93 +398,96 @@ export default function Landing() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-12 px-4 border-t border-white/5 text-center">
-        <div className="container mx-auto">
-          <div className="flex items-center justify-center gap-2 mb-6">
-            <img src="/maxtube_icon.png" alt="MaxTube" className="w-8 h-8 rounded-lg" />
-            <span className="font-black text-xl text-white">MaxTube</span>
+      {/* ══════════════════════════════════════
+          FOOTER
+      ══════════════════════════════════════ */}
+      <footer className="relative z-10 py-10 px-4 border-t border-white/5 text-center">
+        <div className="mx-auto max-w-lg">
+          <div className="flex items-center justify-center gap-2.5 mb-5">
+            <img src="/maxtube_icon.png" alt="MaxTube" className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg object-contain" />
+            <span className="font-black text-lg sm:text-xl text-white">MaxTube</span>
           </div>
-          <p className="text-gray-500 text-sm mb-4 max-w-md mx-auto italic">
+          <p className="text-gray-500 text-xs sm:text-sm mb-3 italic leading-relaxed">
             {content.footer.disclaimer}
           </p>
-          <p className="text-gray-400 font-medium">
-            {content.footer.copyright}
-          </p>
+          <p className="text-gray-500 text-xs sm:text-sm">{content.footer.copyright}</p>
         </div>
       </footer>
 
-      {/* Download Modal */}
+      {/* ══════════════════════════════════════
+          DOWNLOAD MODAL
+      ══════════════════════════════════════ */}
       <Dialog open={isModalOpen} onOpenChange={(open) => !redirecting.active && setIsModalOpen(open)}>
-        <DialogContent className="bg-[#111111] border-white/10 text-white max-w-md rounded-3xl p-8 shadow-[0_0_100px_rgba(255,0,0,0.2)]">
+        <DialogContent className="bg-[#111111] border border-white/10 text-white
+                                   w-[92vw] max-w-md rounded-3xl p-6 sm:p-8
+                                   shadow-[0_0_80px_rgba(255,0,0,0.18)]">
           <AnimatePresence mode="wait">
             {!redirecting.active ? (
               <motion.div
                 key="options"
-                initial={{ opacity: 0, scale: 0.9 }}
+                initial={{ opacity: 0, scale: 0.92 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.1 }}
+                exit={{ opacity: 0, scale: 1.05 }}
               >
-                <DialogHeader>
-                  <DialogTitle className="text-3xl font-black text-center mb-2">
+                <DialogHeader className="mb-5">
+                  <DialogTitle className="text-2xl sm:text-3xl font-black text-center mb-1">
                     {content.download_section.modal_title}
                   </DialogTitle>
-                  <DialogDescription className="text-center text-gray-400 mb-6 text-base font-medium">
-                    Choose the architecture that matches your device for the best performance.
+                  <DialogDescription className="text-center text-gray-400 text-sm sm:text-base font-medium">
+                    Choose the version that matches your device.
                   </DialogDescription>
                 </DialogHeader>
-                <div className="space-y-4">
-                  <button
-                    id="download-64bit-btn"
-                    onClick={() => handleDownloadClick("64bit")}
-                    className="w-full flex items-center justify-between p-6 bg-[#1A1A1A] border border-white/5 rounded-2xl hover:border-[#FF0000]/50 hover:bg-[#1A1A1A]/80 transition-all group shadow-inner"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-[#FF0000]/10 rounded-xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                        {content.download_section.buttons["64bit"].icon}
+                <div className="space-y-3 sm:space-y-4">
+                  {(["64bit", "32bit"] as const).map((type) => (
+                    <button
+                      key={type}
+                      id={`download-${type}-btn`}
+                      onClick={() => handleDownloadClick(type)}
+                      className={`w-full flex items-center justify-between p-4 sm:p-5
+                                  bg-[#1A1A1A] border border-white/5 rounded-2xl
+                                  hover:border-[#FF0000]/50 hover:bg-[#1E1E1E]
+                                  transition-all group`}
+                    >
+                      <div className="flex items-center gap-3 sm:gap-4">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#FF0000]/10 rounded-xl
+                                        flex items-center justify-center text-xl sm:text-2xl
+                                        group-hover:scale-110 transition-transform shrink-0">
+                          {content.download_section.buttons[type].icon}
+                        </div>
+                        <div className="text-left">
+                          <div className="font-bold text-sm sm:text-base">
+                            {content.download_section.buttons[type].text}
+                          </div>
+                          <span className="text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-widest">
+                            {type === "64bit" ? "Recommended · 2018+ devices" : "For older devices"}
+                          </span>
+                        </div>
                       </div>
-                      <div className="text-left font-bold text-lg">
-                        {content.download_section.buttons["64bit"].text}
-                        <span className="block text-xs font-medium text-gray-500 uppercase tracking-widest mt-0.5">Recommended for 2018+ devices</span>
-                      </div>
-                    </div>
-                    <ChevronRight className="w-6 h-6 text-gray-600 group-hover:text-[#FF0000] group-hover:translate-x-1 transition-all" />
-                  </button>
-                  <button
-                    id="download-32bit-btn"
-                    onClick={() => handleDownloadClick("32bit")}
-                    className="w-full flex items-center justify-between p-6 bg-[#1A1A1A] border border-white/5 rounded-2xl hover:border-[#CC0000]/50 hover:bg-[#1A1A1A]/80 transition-all group shadow-inner"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className="w-12 h-12 bg-[#CC0000]/10 rounded-xl flex items-center justify-center text-2xl group-hover:scale-110 transition-transform">
-                        {content.download_section.buttons["32bit"].icon}
-                      </div>
-                      <div className="text-left font-bold text-lg">
-                        {content.download_section.buttons["32bit"].text}
-                        <span className="block text-xs font-medium text-gray-500 uppercase tracking-widest mt-0.5">For older devices</span>
-                      </div>
-                    </div>
-                    <ChevronRight className="w-6 h-6 text-gray-600 group-hover:text-[#CC0000] group-hover:translate-x-1 transition-all" />
-                  </button>
+                      <ChevronRight className="w-5 h-5 text-gray-600 group-hover:text-[#FF0000]
+                                               group-hover:translate-x-1 transition-all shrink-0" />
+                    </button>
+                  ))}
                 </div>
               </motion.div>
             ) : (
               <motion.div
                 key="redirecting"
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 16 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="py-12 flex flex-col items-center text-center"
+                className="py-10 flex flex-col items-center text-center"
               >
-                <div className="relative mb-8">
-                  <div className="absolute inset-0 bg-[#FF0000]/20 blur-[30px] rounded-full animate-pulse" />
-                  <Loader className="w-16 h-16 text-[#FF0000] animate-spin relative z-10" />
+                <div className="relative mb-7">
+                  <div className="absolute inset-0 bg-[#FF0000]/20 blur-[28px] rounded-full animate-pulse" />
+                  <Loader className="w-14 h-14 sm:w-16 sm:h-16 text-[#FF0000] animate-spin relative z-10" />
                 </div>
-                <h3 className="text-2xl font-black mb-3">Redirecting to Download...</h3>
-                <p className="text-gray-400 font-medium">
-                  Securely connecting to download server. <br />
-                  <span className="text-[#FF4444]">Arch: {redirecting.type === '64bit' ? 'ARM-v8a (64-bit)' : 'ARM-v7a (32-bit)'}</span>
+                <h3 className="text-xl sm:text-2xl font-black mb-2">Redirecting to Download…</h3>
+                <p className="text-gray-400 text-sm font-medium">
+                  Securely connecting to download server.<br />
+                  <span className="text-[#FF5555]">
+                    Arch: {redirecting.type === "64bit" ? "ARM-v8a (64-bit)" : "ARM-v7a (32-bit)"}
+                  </span>
                 </p>
-                <div className="mt-8 flex items-center gap-2 text-xs font-bold text-gray-600 uppercase tracking-widest">
+                <div className="mt-7 flex items-center gap-2 text-xs font-bold text-gray-600 uppercase tracking-widest">
                   <ShieldCheck className="w-4 h-4 text-green-500" />
                   Scanned for malware
                 </div>
