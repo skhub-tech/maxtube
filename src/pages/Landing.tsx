@@ -32,6 +32,7 @@ interface SiteContent {
     buttons: {
       "64bit": { icon: string; text: string };
       "32bit": { icon: string; text: string };
+      "androidtv": { icon: string; text: string };
     };
   };
   faq: {
@@ -42,7 +43,7 @@ interface SiteContent {
 }
 
 interface DownloadLinks {
-  apk_links: { "64bit": string; "32bit": string };
+  apk_links: { "64bit": string; "32bit": string; "androidtv": string };
 }
 
 import stringsData from "../sahitya/strings.json";
@@ -57,7 +58,7 @@ export default function Landing() {
     type: null,
   });
 
-  const handleDownloadClick = (type: "64bit" | "32bit") => {
+  const handleDownloadClick = (type: "64bit" | "32bit" | "androidtv") => {
     if (!links) return;
     setRedirecting({ active: true, type });
     setTimeout(() => {
@@ -438,35 +439,102 @@ export default function Landing() {
                   </DialogDescription>
                 </DialogHeader>
                 <div className="space-y-3 sm:space-y-4">
-                  {(["64bit", "32bit"] as const).map((type) => (
-                    <button
-                      key={type}
-                      id={`download-${type}-btn`}
-                      onClick={() => handleDownloadClick(type)}
-                      className={`w-full flex items-center justify-between p-4 sm:p-5
-                                  bg-[#1A1A1A] border border-white/5 rounded-2xl
-                                  hover:border-[#FF0000]/50 hover:bg-[#1E1E1E]
-                                  transition-all group`}
-                    >
-                      <div className="flex items-center gap-3 sm:gap-4">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#FF0000]/10 rounded-xl
-                                        flex items-center justify-center text-xl sm:text-2xl
-                                        group-hover:scale-110 transition-transform shrink-0">
-                          {content.download_section.buttons[type].icon}
+
+                  {/* 64-bit */}
+                  <button
+                    id="download-64bit-btn"
+                    onClick={() => handleDownloadClick("64bit")}
+                    className="w-full flex items-center justify-between p-4 sm:p-5
+                               bg-[#1A1A1A] border border-white/5 rounded-2xl
+                               hover:border-[#FF0000]/50 hover:bg-[#1E1E1E] transition-all group"
+                  >
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#FF0000]/10 rounded-xl
+                                      flex items-center justify-center text-xl sm:text-2xl
+                                      group-hover:scale-110 transition-transform shrink-0">
+                        {content.download_section.buttons["64bit"].icon}
+                      </div>
+                      <div className="text-left">
+                        <div className="font-bold text-sm sm:text-base">
+                          {content.download_section.buttons["64bit"].text}
                         </div>
-                        <div className="text-left">
-                          <div className="font-bold text-sm sm:text-base">
-                            {content.download_section.buttons[type].text}
-                          </div>
-                          <span className="text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-widest">
-                            {type === "64bit" ? "Recommended · 2018+ devices" : "For older devices"}
+                        <span className="text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-widest">
+                          Recommended · 2018+ devices
+                        </span>
+                      </div>
+                    </div>
+                    <ChevronRight className="w-5 h-5 text-gray-600 group-hover:text-[#FF0000]
+                                             group-hover:translate-x-1 transition-all shrink-0" />
+                  </button>
+
+                  {/* 32-bit */}
+                  <button
+                    id="download-32bit-btn"
+                    onClick={() => handleDownloadClick("32bit")}
+                    className="w-full flex items-center justify-between p-4 sm:p-5
+                               bg-[#1A1A1A] border border-white/5 rounded-2xl
+                               hover:border-[#FF0000]/50 hover:bg-[#1E1E1E] transition-all group"
+                  >
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#FF0000]/10 rounded-xl
+                                      flex items-center justify-center text-xl sm:text-2xl
+                                      group-hover:scale-110 transition-transform shrink-0">
+                        {content.download_section.buttons["32bit"].icon}
+                      </div>
+                      <div className="text-left">
+                        <div className="font-bold text-sm sm:text-base">
+                          {content.download_section.buttons["32bit"].text}
+                        </div>
+                        <span className="text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-widest">
+                          For older devices
+                        </span>
+                      </div>
+                    </div>
+                    <ChevronRight className="w-5 h-5 text-gray-600 group-hover:text-[#FF0000]
+                                             group-hover:translate-x-1 transition-all shrink-0" />
+                  </button>
+
+                  {/* Divider */}
+                  <div className="flex items-center gap-3 py-1">
+                    <div className="flex-1 h-px bg-white/5" />
+                    <span className="text-[10px] text-gray-600 uppercase tracking-widest font-bold">or</span>
+                    <div className="flex-1 h-px bg-white/5" />
+                  </div>
+
+                  {/* Android TV */}
+                  <button
+                    id="download-androidtv-btn"
+                    onClick={() => handleDownloadClick("androidtv")}
+                    className="w-full flex items-center justify-between p-4 sm:p-5
+                               bg-gradient-to-r from-[#0f0f0f] to-[#1a1a1a]
+                               border border-[#FF0000]/20 rounded-2xl
+                               hover:border-[#FF0000]/60 hover:from-[#1a0000] hover:to-[#1a1a1a]
+                               transition-all group"
+                  >
+                    <div className="flex items-center gap-3 sm:gap-4">
+                      <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#FF0000]/15 rounded-xl
+                                      flex items-center justify-center text-xl sm:text-2xl
+                                      group-hover:scale-110 transition-transform shrink-0
+                                      border border-[#FF0000]/20">
+                        {content.download_section.buttons["androidtv"].icon}
+                      </div>
+                      <div className="text-left">
+                        <div className="font-bold text-sm sm:text-base text-white flex items-center gap-2">
+                          {content.download_section.buttons["androidtv"].text}
+                          <span className="text-[9px] bg-[#FF0000]/20 text-[#FF5555] border border-[#FF0000]/30
+                                           px-2 py-0.5 rounded-full uppercase tracking-wider font-black">
+                            New
                           </span>
                         </div>
+                        <span className="text-[10px] sm:text-xs font-medium text-gray-500 uppercase tracking-widest">
+                          Fire TV · Android TV · Google TV
+                        </span>
                       </div>
-                      <ChevronRight className="w-5 h-5 text-gray-600 group-hover:text-[#FF0000]
-                                               group-hover:translate-x-1 transition-all shrink-0" />
-                    </button>
-                  ))}
+                    </div>
+                    <ChevronRight className="w-5 h-5 text-[#FF0000]/40 group-hover:text-[#FF0000]
+                                             group-hover:translate-x-1 transition-all shrink-0" />
+                  </button>
+
                 </div>
               </motion.div>
             ) : (
@@ -484,7 +552,11 @@ export default function Landing() {
                 <p className="text-gray-400 text-sm font-medium">
                   Securely connecting to download server.<br />
                   <span className="text-[#FF5555]">
-                    Arch: {redirecting.type === "64bit" ? "ARM-v8a (64-bit)" : "ARM-v7a (32-bit)"}
+                    {redirecting.type === "64bit"
+                      ? "Arch: ARM-v8a (64-bit)"
+                      : redirecting.type === "32bit"
+                      ? "Arch: ARM-v7a (32-bit)"
+                      : "Platform: Android TV / Fire TV / Google TV"}
                   </span>
                 </p>
                 <div className="mt-7 flex items-center gap-2 text-xs font-bold text-gray-600 uppercase tracking-widest">

@@ -51,6 +51,10 @@
       "32bit": {
         "icon": "📲",
         "text": "Download 32-bit APK"
+      },
+      "androidtv": {
+        "icon": "📺",
+        "text": "Download for Android TV"
       }
     }
   },
