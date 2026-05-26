@@ -1,0 +1,25 @@
+{
+    "name": "MaxTube",
+    "short_name": "MaxTube",
+    "description": "MaxTube is the ultimate enhanced YouTube app. No ads, background play, 4K downloads, custom themes, YouTube Music offline — all free.",
+    "start_url": "/?source=pwa",
+    "scope": "/",
+    "icons": [
+        {
+            "src": "/maxtube_icon.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "any"
+        },
+        {
+            "src": "/maxtube_icon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ],
+    "theme_color": "#FF0000",
+    "background_color": "#0D0D0D",
+    "display": "standalone",
+    "categories": ["entertainment", "multimedia"]
+}

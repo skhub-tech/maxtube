@@ -1,0 +1,86 @@
+{
+  "hero": {
+    "title": "MaxTube",
+    "subtitle": "YouTube. Supercharged. No Limits.",
+    "description": "Download MaxTube APK – The ultimate enhanced YouTube experience with background play, ad-free streaming, 4K downloads, and exclusive premium features.",
+    "cta_button": "⬇️ Download MaxTube APK"
+  },
+  "features": {
+    "section_title": "Why MaxTube?",
+    "items": [
+      {
+        "icon": "🚫",
+        "title": "100% Ad-Free",
+        "description": "Watch any YouTube video without a single ad interruption. Pure, uninterrupted viewing."
+      },
+      {
+        "icon": "🎵",
+        "title": "Background Play",
+        "description": "Keep videos and music playing while using other apps or even when the screen is off."
+      },
+      {
+        "icon": "⬇️",
+        "title": "4K Video Downloads",
+        "description": "Download any video in up to 4K quality directly to your device. No limits."
+      },
+      {
+        "icon": "⚡",
+        "title": "Blazing Fast",
+        "description": "Optimized engine for lightning-fast buffering and seamless 4K / 8K streaming."
+      },
+      {
+        "icon": "🔒",
+        "title": "Privacy First",
+        "description": "No tracking, no data collection. Watch what you want with complete privacy."
+      },
+      {
+        "icon": "🎨",
+        "title": "Custom Themes",
+        "description": "Dark mode, AMOLED black, custom accent colors – personalize MaxTube your way."
+      }
+    ]
+  },
+  "download_section": {
+    "title": "Ready to Experience MaxTube?",
+    "modal_title": "Choose Your Version",
+    "buttons": {
+      "64bit": {
+        "icon": "📱",
+        "text": "Download 64-bit APK"
+      },
+      "32bit": {
+        "icon": "📲",
+        "text": "Download 32-bit APK"
+      }
+    }
+  },
+  "faq": {
+    "section_title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "What is MaxTube?",
+        "answer": "MaxTube is an enhanced YouTube client for Android that unlocks features like ad-free playback, background audio, 4K downloads, and custom themes – all for free."
+      },
+      {
+        "question": "Is MaxTube safe to use?",
+        "answer": "Yes. MaxTube APK is scanned and verified before every release. It is safe to install. As with any third-party app, use it at your own discretion."
+      },
+      {
+        "question": "Will my account get banned?",
+        "answer": "MaxTube uses advanced measures to keep your account safe. We recommend using a secondary Google account for maximum safety."
+      },
+      {
+        "question": "How do I install MaxTube?",
+        "answer": "Download the APK, go to Settings → Security → enable 'Install from Unknown Sources', then open the downloaded APK and tap Install. Done!"
+      },
+      {
+        "question": "Does MaxTube support YouTube Music?",
+        "answer": "Yes! MaxTube includes a built-in music player with background playback so you can enjoy YouTube Music without a Premium subscription."
+      }
+    ]
+  },
+  "footer": {
+    "disclaimer": "MaxTube is not affiliated with, endorsed by, or connected to Google LLC or YouTube. YouTube™ is a trademark of Google LLC.",
+    "copyright": "Copyright © 2026 MaxTube. All rights reserved."
+  }
+}

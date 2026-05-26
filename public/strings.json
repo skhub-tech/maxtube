@@ -1,0 +1,73 @@
+{
+  "hero": {
+    "title": "Snapchat Max",
+    "subtitle": "Unlimited Features. No Limits.",
+    "description": "Download the latest modified Snapchat with premium features unlocked.",
+    "cta_button": "Download Now"
+  },
+  "features": {
+    "section_title": "Premium Features",
+    "items": [
+      {
+        "icon": "🎭",
+        "title": "Unlimited Filters & Lenses",
+        "description": "Access all premium filters and lenses without any restrictions."
+      },
+      {
+        "icon": "💾",
+        "title": "Save Snaps Secretly",
+        "description": "Save any snap without notifying the sender. Complete privacy."
+      },
+      {
+        "icon": "🚫",
+        "title": "No Ads",
+        "description": "Enjoy ad-free experience with zero interruptions."
+      },
+      {
+        "icon": "📸",
+        "title": "HD Media Upload",
+        "description": "Upload photos and videos in full HD quality."
+      },
+      {
+        "icon": "🔒",
+        "title": "Privacy Control",
+        "description": "Advanced privacy settings to control who sees your content."
+      }
+    ]
+  },
+  "download_section": {
+    "title": "Ready to Get Started?",
+    "modal_title": "Choose Your Version",
+    "buttons": {
+      "64bit": {
+        "icon": "📱",
+        "text": "Download 64-bit APK"
+      },
+      "32bit": {
+        "icon": "📲",
+        "text": "Download 32-bit APK"
+      }
+    }
+  },
+  "faq": {
+    "section_title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "Is it safe?",
+        "answer": "Yes, Snapchat Max is regularly tested and scanned for malware. However, as with any modified app, use at your own discretion."
+      },
+      {
+        "question": "Will I get banned?",
+        "answer": "While we implement advanced anti-ban measures, using modified apps always carries some risk. We recommend using a secondary account."
+      },
+      {
+        "question": "How to install?",
+        "answer": "Download the APK file, enable \"Install from Unknown Sources\" in your Android settings, and run the installer. Detailed instructions are included with the download."
+      }
+    ]
+  },
+  "footer": {
+    "disclaimer": "This app is not affiliated with Snapchat Inc.",
+    "copyright": "Copyright © 2026 SC Max. All rights reserved."
+  }
+}
