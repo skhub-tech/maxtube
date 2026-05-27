@@ -1,7 +1,7 @@
 {
   "apk_links": {
-    "64bit": "https://www.mediafire.com/file/5joll3ocr2ihfh7/MaxTube_v1.0.0.apk/file",
-    "32bit": "https://www.mediafire.com/file/5joll3ocr2ihfh7/MaxTube_v1.0.0.apk/file",
+    "64bit": "https://github.com/skhub-tech/maxtube/releases/download/MaxTube/MaxTubeV1.1.0.apk",
+    "32bit": "https://github.com/skhub-tech/maxtube/releases/download/MaxTube/MaxTubeV1.1.0.apk",
     "androidtv": "https://t.me/sktech_000"
   }
 }
