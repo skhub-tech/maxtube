@@ -2,7 +2,7 @@
   "version": "1.0.0",
   "title": "MaxTube v1.0.1 — What's New 🎉",
   "message": "• Performance improvements & stability fixes\n• Smoother video playback\n• Notification & download improvements\n• UI polish and bug fixes",
-  "download_url": "https://github.com/skhub-tech/maxtube/releases/latest/download/app-release.apk",
-  "force_update": false,
-  "direct_install": false
+  "download_url": "https://github.com/skhub-tech/maxtube/releases/download/MaxTube/MaxTubeV1.1.0.apk",
+  "force_update": true,
+  "direct_install": true
 }
