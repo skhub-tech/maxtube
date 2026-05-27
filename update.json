@@ -2,7 +2,7 @@
   "version": "1.1.0",
   "title": "MaxTube v1.1.0 What's New 🎉",
   "message": "• Performance improvements & stability fixes\n• Smoother video playback\n• Notification & download improvements\n• UI polish and bug fixes",
-  "download_url": "https://github.com/skhub-tech/maxtube/releases/download/MaxTube/MaxTubeV1.1.0.apk",
+  "download_url": "https://maxtubepro.vercel.app",
   "force_update": true,
   "direct_install": false
 }
